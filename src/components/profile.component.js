@@ -44,9 +44,6 @@ export default class Profile extends Component {
         </h3>
       </header>
       <p>
-        <strong>UserID:</strong> {this.state.userId}
-      </p>
-      <p>
         <strong>Id:</strong> {this.state.email.substr(0,9)}
       </p>
       <p>

@@ -32,5 +32,13 @@ const itemSchema = new mongoose.Schema({
 log("Created item Schema");
 
  const itemModel = mongoose.model('item',itemSchema);
+/* const newRequest=new itemModel({
+    itemName:"item 0",
+    labName: "Nila campus",
+    totalQuantity: 200,
+    availableQuantity: 0,
+});
+newRequest.save()*/
+
  log("Created item model");
  module.exports = itemModel;

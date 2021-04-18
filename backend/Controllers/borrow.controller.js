@@ -10,15 +10,17 @@ exports.create = (req,res) => {
         return res.status(400)
                         .send({msg: "Not Specified any borrow request to create!"});
     log("At create");
-    const newRequest=new borrowRequest({
-        userId:req.body.userId,
-        itemName: req.body.itemName,
-        labName: req.body.labName,
-        quantity: req.body.quantity,
-        dueDate: req.body.dueDate,
-    });
+    let products = req.body.products;
+    for (var i=0; i<products.length; i++ ){
+        const newRequest=new borrowRequest({
+            userId:req.body.userId,
+            itemName: products[i].name,
+            labName: req.body.labName,
+            quantity: products[i].qty,
+            dueDate: req.body.dueDate,
+        });
     
-    newRequest.save()
+        newRequest.save()
                 .then(()=>{
                     res.status(200)
                             .send({msg:"Success"});
@@ -27,6 +29,7 @@ exports.create = (req,res) => {
                         console.log(err)
                         res.status(500).send({msg:err});
                     })
+    }
 };
 
 exports.find = (req,res)=>{
@@ -35,8 +38,8 @@ exports.find = (req,res)=>{
                     .send({msg: "Not Specified user to get borrowing"});
     log("borrow request finding by userid");
     const id=req.body.id;
-    borrowRequest.find({userid:id, submitted:false})
-                    .then(data=>res.send(data))
+    borrowRequest.find({userId:id, submitted:false})
+                    .then(data=>{console.log(data);res.send(data)})
                     .catch(err=>{
                         res.status(500)
                                 .send({

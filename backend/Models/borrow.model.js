@@ -9,11 +9,11 @@ const borrowRequestSchema = new mongoose.Schema({
     itemName: {
         required: true,
         type : String
-    },/*
+    },
     labName:{
         type:String,
         required:true
-    },*/
+    },
     quantity: {
         required:true,
         type: Number

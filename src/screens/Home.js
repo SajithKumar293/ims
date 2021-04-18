@@ -5,7 +5,10 @@ import Footer from "../components/footer.component"
 import Profile from "../components/profile.component"
 import MyItems from '../components/myItems.component';
 import AvailableItems from "../components/availableItems.components";
+import Requests from "../components/allRequests.component"
 import { authContext } from '../contexts/AuthContext';
+import Cart from '../components/cart.component';
+import Checkout from '../components/checkout.component';
 
 const Home = () => {
   const [showStudent, setShowStudent] = useState(false);
@@ -32,7 +35,9 @@ const Home = () => {
       <Route path="/" exact component={Profile}/>
       { showStudent && ( <Route path="/my-items" component={MyItems} /> )}
       { showStudent && ( <Route path="/available-items" component={AvailableItems} /> )}
-      <Footer/>
+      { showStudent && ( <Route path="/cart" component={Cart} /> )}
+      { showStudent && ( <Route path="/checkout" component={Checkout} /> )}
+      { showSupplier && ( <Route path="/all-requests" component={Requests} /> )}
     </Router>
   );
 };

@@ -80,7 +80,7 @@ exports.userCheck = (req,res,next) =>{
 };
 
 exports.InchargeMiddleware = (req,res,next) =>{
-    if(req.user.role!='Incharge' && req.user.role!='Admin')
+    if(req.user.role!='SUPPLIER' && req.user.role!='ADMIN')
         res.status(401).send({
             msg:"Not Authorized user"
         });

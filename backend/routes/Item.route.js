@@ -10,6 +10,8 @@ console.log("At item routing");
 //Passing the appropriate controller to the request method received.
 //To get all items available
 app.get("/all",item.findAll);
+//To get all items in the cart
+app.post("/cart",item.findCart);
 //To get all items in the available lab
 app.get("/lab",item.findLab);
 //To get details of particular item

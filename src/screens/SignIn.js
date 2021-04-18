@@ -19,7 +19,7 @@ const SignIn = ({history}) => {
             console.log(token);
             console.log(user);
             setAuthData(token);
-            setRoleData(user.role);
+            setRoleData("user");
             setUserID(user._id);
             Promise.resolve();
             history.replace('/');

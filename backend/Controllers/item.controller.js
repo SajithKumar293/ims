@@ -16,6 +16,35 @@ exports.findAll = (req, res) => {
                 });
 };
 
+exports.findCart = (req, res) => {
+    log("At findCart");
+    let products = [], ids = [];
+    if (!req.params)
+        return res.status(400)
+                    .send({msg: "Not Specified any items id's!"});
+    let cart = req.body.cart;
+    if (!cart) return res.json(products);
+    for (let item in cart){
+        ids.push(item)
+    }
+    item.find({"_id":{$in:ids}}).then(data=>{
+                for (var i = 0; i < data.length; i++) {
+                    id = data[i]._id;
+                    const temp = {};
+                    if (cart.hasOwnProperty(id)) {
+                        temp.id = id;
+                        temp.name = data[i].itemName;
+                        temp.qty = cart[id];
+                        products.push(temp);
+                    }
+                }
+                return res.send(products);
+                })
+        .catch(err => {
+            res.status(500).send({msg: err});
+    });
+};
+
 exports.find = (req,res) =>  {
     if (!req.body)
         return res.status(400)

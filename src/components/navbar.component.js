@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Button } from "react-bootstrap";
 import { authContext } from "../contexts/AuthContext";
+import {ShoppingCartOutlined} from '@ant-design/icons';
+import 'antd/dist/antd.css';
 
 export default class Navbar extends Component {
     static contextType = authContext;
@@ -17,10 +19,10 @@ export default class Navbar extends Component {
       }
       componentDidMount() {
         const {role} = this.context;
-        if (role.data===''){
+        if (role.data==='ADMIN'){
             this.setState({showAdmin: true})
         }
-        else if (role.data==='') {
+        else if (role.data==='SUPPLIER') {
             this.setState({showSupplier: true})
         } 
         else {
@@ -52,14 +54,17 @@ export default class Navbar extends Component {
                                 <li className="nav-item">
                                 <a className="nav-link" href="/available-items">Available Items</a>
                                 </li> )}
-                            <div>
-                            <li className="nav-item .search-container" style={{width:"30vh",paddingTop: "15px"}}>
-                                <input type="text" className="searchTerm" placeholder="What are you looking for?"/>
-                                <button type="submit" className="searchButton">
-                                    <i className="fa fa-search"></i>
-                                </button>
-                            </li>
-                            </div>
+
+                            { this.state.showStudent && (    
+                            <li className="nav-item">  
+                            <a className="nav-link" href="/cart"><ShoppingCartOutlined style={{ fontSize:"30px"}}/></a>
+                            </li> )}   
+
+                            { this.state.showSupplier && (
+                                <li className="nav-item">
+                                <a className="nav-link" href="/all-requests">Requests</a>
+                                </li> )}
+
                             <li className="nav-item">
                             <Button
                                 variant="primary"
